@@ -114,48 +114,48 @@ func (wac *Conn) handle(message interface{}) {
 	switch m := message.(type) {
 	case error:
 		for _, h := range wac.handler {
-			go h.HandleError(m)
+			h.HandleError(m)
 		}
 	case string:
 		for _, h := range wac.handler {
 			if x, ok := h.(JsonMessageHandler); ok {
-				go x.HandleJsonMessage(m)
+				x.HandleJsonMessage(m)
 			}
 		}
 	case TextMessage:
 		for _, h := range wac.handler {
 			if x, ok := h.(TextMessageHandler); ok {
-				go x.HandleTextMessage(m)
+				x.HandleTextMessage(m)
 			}
 		}
 	case ImageMessage:
 		for _, h := range wac.handler {
 			if x, ok := h.(ImageMessageHandler); ok {
-				go x.HandleImageMessage(m)
+				x.HandleImageMessage(m)
 			}
 		}
 	case VideoMessage:
 		for _, h := range wac.handler {
 			if x, ok := h.(VideoMessageHandler); ok {
-				go x.HandleVideoMessage(m)
+				x.HandleVideoMessage(m)
 			}
 		}
 	case AudioMessage:
 		for _, h := range wac.handler {
 			if x, ok := h.(AudioMessageHandler); ok {
-				go x.HandleAudioMessage(m)
+				x.HandleAudioMessage(m)
 			}
 		}
 	case DocumentMessage:
 		for _, h := range wac.handler {
 			if x, ok := h.(DocumentMessageHandler); ok {
-				go x.HandleDocumentMessage(m)
+				x.HandleDocumentMessage(m)
 			}
 		}
 	case *proto.WebMessageInfo:
 		for _, h := range wac.handler {
 			if x, ok := h.(RawMessageHandler); ok {
-				go x.HandleRawMessage(m)
+				x.HandleRawMessage(m)
 			}
 		}
 	}
